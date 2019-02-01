@@ -1,0 +1,105 @@
+.job {
+    background: #fff;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -1px 1px 1px #ccc;
+    box-shadow: 1px 0px 1px #ccc;
+    border-radius: 3px;
+}
+    
+.profile {
+    background: #fff;
+    border-bottom: 1px solid #eeeeee;
+    padding: 15px 20px;
+    display: flex;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 500px;
+    background-color: #fdaa5a;
+    text-align: center;
+    font-size: 24px;
+    color: #fff;
+    line-height: 1.7em;
+    font-weight: 500;
+    margin-right: 10px;
+    border: 1px solid #ffa045;
+}
+
+.name {
+    display: block;
+    font-weight: 600;
+}
+
+.date {
+    font-size: 14px;
+    color: #8b8b8b;
+}
+
+.icon {
+    margin-right: 5px;
+}
+  
+.info {
+    border-bottom: 1px solid #eeeeee;
+    padding: 10px 20px;
+    color: #626262;
+}
+
+.suburb {
+    padding-right: 20px;
+}
+  
+.category {
+    padding-right: 20px;
+}
+  
+.jobid {
+    padding: 10px 20px;
+}
+
+.desc {
+    border-bottom: 1px solid #eeeeee;
+    padding: 20px 20px;
+    color: #626262;
+    font-size: 15px;
+}
+  
+.action {
+    border-bottom: 1px solid #eeeeee;
+    padding: 10px 20px;
+}
+  
+.price {
+    padding: 10px 20px;
+    color: #555555;
+    font-weight: 600;
+}
+
+.price::before {
+    content:"$";
+}
+
+.btn {
+    padding: 10px 30px;
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
+    border-radius: 2px;
+    margin: 10px 10px 10px 0;
+}
+
+.btn-decline {
+    background: #eeeeee;
+    color: #000;
+    border-bottom: 2px solid #c3bfbf;
+}
+
+.btn-accept {
+    background: #ff8e41;
+    color: #fff;
+    border-bottom: 2px solid #c55a1a;
+}
