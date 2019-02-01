@@ -1,18 +1,19 @@
+
 .job {
-    background: #fff;
-    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
-    box-shadow: -1px 1px 1px #ccc;
-    box-shadow: 1px 0px 1px #ccc;
+    background-color: #fff;
+    margin-bottom: 20px;
+    box-shadow: -1px 1px 1px #ccc, 1px 0px 1px #ccc;
     border-radius: 3px;
 }
     
 .profile {
-    background: #fff;
+    display: flex;
+    background-color: #fff;
     border-bottom: 1px solid #eeeeee;
     padding: 15px 20px;
-    display: flex;
+    
 }
 
 .avatar {
@@ -32,10 +33,11 @@
 .name {
     display: block;
     font-weight: 600;
+    font-size: 17px;
 }
 
 .date {
-    font-size: 14px;
+    font-size: 15px;
     color: #8b8b8b;
 }
 
@@ -46,7 +48,8 @@
 .info {
     border-bottom: 1px solid #eeeeee;
     padding: 10px 20px;
-    color: #626262;
+    color: #737272;
+    font-size: 17px;
 }
 
 .suburb {
@@ -64,37 +67,38 @@
 .desc {
     border-bottom: 1px solid #eeeeee;
     padding: 20px 20px;
-    color: #626262;
-    font-size: 15px;
+    color: #737272;
+    font-size: 16px;
 }
   
 .action {
     border-bottom: 1px solid #eeeeee;
     padding: 10px 20px;
+    color: #737272;
 }
   
 .price {
-    padding: 10px 20px;
-    color: #555555;
+    padding: 10px 10px;
     font-weight: 600;
+    font-size: 18px;
 }
 
-.price::before {
-    content:"$";
+.price-accepted {
+    padding: 10px 10px;
+    font-size: 18px;
 }
 
 .btn {
-    padding: 10px 30px;
+    padding: 12px 30px;
     border: none;
     font-weight: 600;
-    font-size: 15px;
+    font-size: 16px;
     border-radius: 2px;
     margin: 10px 10px 10px 0;
 }
 
 .btn-decline {
     background: #eeeeee;
-    color: #000;
     border-bottom: 2px solid #c3bfbf;
 }
 
@@ -102,4 +106,42 @@
     background: #ff8e41;
     color: #fff;
     border-bottom: 2px solid #c55a1a;
+}
+
+.btn-tab {
+    padding: 20px 0;
+    border: none;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 2px;
+    margin: 10px 0px 20px 0;
+    border-right: 1px solid #eeeeee;
+    width: 50%;
+    font-size: 20px;
+    box-shadow: -1px 1px 1px #ccc, 1px 0px 1px #ccc;
+}
+
+.btn-tab.selected {
+    border-bottom: 3px solid #f37926;
+}
+
+.details {
+    padding: 20px 20px;
+    color: #737272;
+    font-size: 16px;
+}
+
+.details-desc {
+    padding: 20px 0px;
+}
+
+.phone {
+    margin-right: 10px;
+    color: #fdaa5a;
+    font-weight: 600;
+}
+
+.email {
+    color: #fdaa5a;
+    font-weight: 600;
 }

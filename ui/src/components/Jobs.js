@@ -1,58 +1,72 @@
 import React, { Component } from 'react';
-import Job from './Job';
+import axios from 'axios';
+import NewJob from './NewJob';
+import AcceptedJob from './AcceptedJob';
+
 import './Jobs.css';
 
 export class Jobs extends Component {
 
+    componentDidMount() {
+        axios.get('http://localhost:8080/jobs').then((response) => {
+            this.setState({jobs: response.data});
+        }, (response) => {
+            console.log("Error", response);
+        });
+    }
+    
     state = {
-        jobs: [
-            {
-                "job_status": "new",
-                "job_id": 1,
-                "contact_name": "Luke Skywalker",
-                "contact_phone": "0412345678",
-                "contact_email": "luke@mailinator.com",
-                "price": "20",
-                "description": "Need to paint 2 aluminum windows and a sliding glass door",
-                "created_at": "2019-01-29 07:21:45",
-                "category": "Plumbing",
-                "suburb": "Sydney",
-                "postcode": 2000
-            },
-            {
-                "job_status": "new",
-                "job_id": 4,
-                "contact_name": "Kylo Ren",
-                "contact_phone": "0488770066",
-                "contact_email": "kylo@mailinator.com",
-                "price": "15",
-                "description": "Internal walls 3 colours",
-                "created_at": "2019-01-30 09:21:45",
-                "category": "Handyman",
-                "suburb": "Surry Hills",
-                "postcode": 2010
-            },
-            {
-                "job_status": "accepted",
-                "job_id": 2,
-                "contact_name": "Darth Vader",
-                "contact_phone": "0422223333",
-                "contact_email": "darth@mailinator.com",
-                "price": "30",
-                "description": "Paster exposed brick walls (see photos), square off 2 archways (see photos) and expand pantry (see photos).",
-                "created_at": "2019-01-28 11:21:45",
-                "category": "Electrical",
-                "suburb": "Bondi",
-                "postcode": 2026
-            }
-        ]
+        view: 'new',
+        jobs: []
     }
 
-  render() {
-    return this.state.jobs.map((job) => (
-        <Job key={job.job_id} job={job}/>
-    ));
-  }
+    changeView = (e) => {
+        e.preventDefault();
+        this.setState({ view: e.target.value});
+    }
+    
+    accept = (id) => {
+        axios.post('http://localhost:8080/jobs/' + id + '/accept', {}).then((response) => {
+            this.setState({jobs: response.data});
+        }, (response) => {
+            console.log("Error", response);
+        });
+    }
+  
+    decline = (id) => {
+        axios.post('http://localhost:8080/jobs/' + id + '/decline', {}).then((response) => {
+            this.setState({jobs: response.data});
+        }, (response) => {
+            console.log("Error", response);
+        });
+    }
+
+    render() {
+        return [
+            <div>
+                <button className={this.state.view === 'new' ? 'btn-tab selected' : 'btn-tab'} 
+                    onClick={this.changeView}
+                    value="new">Invited </button>
+                
+                <button className={this.state.view === 'accepted' ? 'btn-tab selected' : 'btn-tab'} 
+                    onClick={this.changeView}
+                    value="accepted">Accepted </button>
+            </div>,
+            
+            this.state.jobs.map(job => {
+                if (this.state.view === 'new') {
+                    if (job.job_status === 'new') {
+                        return <NewJob key={job.job_id} job={job} accept={this.accept} decline={this.decline}/>
+                    }
+                } else {
+                    if (job.job_status === 'accepted') {
+                        return <AcceptedJob key={job.job_id} job={job}/>
+                    }
+                }
+                return '';
+            })
+        ]
+    }
 }
 
 export default Jobs

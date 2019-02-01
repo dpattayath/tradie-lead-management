@@ -2,62 +2,90 @@ import * as express from 'express';
 
 const app = express();
 const port = 8080;
-const router = express.Router();
-const mysql = require('mysql')
+const mysql = require('mysql');
+const cors = require('cors');
 
-router.get('/', function(req, res) {
+app.use(cors());
+
+app.get('/', function(req, res, next) {
     res.send("Welcome to hipages test!!");
 });
 
-router.get('/jobs', function(req, res) {
+app.get('/jobs', function(req, res, next) {
 
-    res.json(
-    [
-        {
-            job_status: 'new',
-            job_id: 1,
-            contact_name: 'Luke Skywalker',
-            contact_phone: '0412345678',
-            contact_email: 'luke@mailinator.com',
-            price: '20',
-            description: 'Need to paint 2 aluminum windows and a sliding glass door',
-            created_at: '2019-01-29 07:21:45',
-            category: 'Plumbing',
-            suburb: 'Sydney',
-            postcode: 2000	
-        },
-        {
-            job_status: 'new',
-            job_id: 4,
-            contact_name: 'Kylo Ren',
-            contact_phone: '0488770066',
-            contact_email: 'kylo@mailinator.com',
-            price: '15',
-            description: 'Internal walls 3 colours',
-            created_at: '2019-01-30 09:21:45',
-            category: 'Handyman',
-            suburb: 'Surry Hills',
-            postcode: 2010	
-        },
-        {
-            job_status: 'accepted',
-            job_id: 2,
-            contact_name: 'Darth Vader',
-            contact_phone: '0422223333',
-            contact_email: 'darth@mailinator.com',
-            price: '30',
-            description: 'Paster exposed brick walls (see photos), square off 2 archways (see photos) and expand pantry (see photos).',
-            created_at: '2019-01-28 11:21:45',
-            category: 'Electrical',
-            suburb: 'Bondi',
-            postcode: 2026	
-        }
-    ]);
+
+    var connection = mysql.createConnection({
+        host     : 'localhost',
+        user     : 'root',
+        password : '',
+        database : 'hipages'
+    });
+    
+    connection.connect();
+    
+    const query = "SELECT * FROM vw_jobs";
+
+    connection.query(query, function (err, rows, fields) {
+        if (err) throw err
+        res.json(rows);
+    });
+
+    connection.end();
 
 });
 
-// register api routes
-app.use('/api', router);
+app.post('/jobs/:id/accept', function(req, res, next) {
+
+    var connection = mysql.createConnection({
+        host     : 'localhost',
+        user     : 'root',
+        password : '',
+        database : 'hipages'
+    });
+
+    connection.connect();
+    
+    var query = 'UPDATE jobs set status = \'accepted\' WHERE id = ' + req.params.id;
+
+    connection.query(query, {'id': req.params.id});
+
+    query = "SELECT * FROM vw_jobs";
+
+    connection.query(query, function (err, rows, fields) {
+        if (err) throw err
+        res.json(rows);
+    });
+
+    connection.end();
+
+});
+
+app.post('/jobs/{id}/decline', function(req, res, next) {
+    
+    var connection = mysql.createConnection({
+        host     : 'localhost',
+        user     : 'root',
+        password : '',
+        database : 'hipages'
+    });
+
+    connection.connect();
+    
+    var query = 'UPDATE jobs set status = \'declined\' WHERE id = ' + req.params.id;
+
+    connection.query(query);
+
+    query = "SELECT * FROM vw_jobs";
+
+    connection.query(query, function (err, rows, fields) {
+        if (err) throw err
+        res.json(rows);
+    });
+
+    connection.end();
+
+});
+
 
 // listen
 app.listen(port, () => {
