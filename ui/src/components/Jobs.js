@@ -27,7 +27,13 @@ export class Jobs extends Component {
     
     accept = (id) => {
         axios.post('http://localhost:8080/jobs/' + id + '/accept', {}).then((response) => {
-            this.setState({jobs: response.data});
+            this.setState({jobs: this.state.jobs.map(job => {
+                    if (job.job_id === id) {
+                        job.job_status = 'accepted';
+                    }
+                    return job;
+                })
+            });
         }, (response) => {
             console.log("Error", response);
         });
@@ -35,7 +41,13 @@ export class Jobs extends Component {
   
     decline = (id) => {
         axios.post('http://localhost:8080/jobs/' + id + '/decline', {}).then((response) => {
-            this.setState({jobs: response.data});
+            this.setState({jobs: this.state.jobs.map(job => {
+                    if (job.job_id === id) {
+                        job.job_status = 'declined';
+                    }
+                    return job;
+                })
+            });
         }, (response) => {
             console.log("Error", response);
         });
@@ -43,6 +55,7 @@ export class Jobs extends Component {
 
     render() {
         return [
+            
             <div>
                 <button className={this.state.view === 'new' ? 'btn-tab selected' : 'btn-tab'} 
                     onClick={this.changeView}
@@ -54,15 +67,24 @@ export class Jobs extends Component {
             </div>,
             
             this.state.jobs.map(job => {
+                
                 if (this.state.view === 'new') {
+                    
                     if (job.job_status === 'new') {
+                       
                         return <NewJob key={job.job_id} job={job} accept={this.accept} decline={this.decline}/>
+                    
                     }
+                
                 } else {
+                    
                     if (job.job_status === 'accepted') {
+                    
                         return <AcceptedJob key={job.job_id} job={job}/>
+                    
                     }
                 }
+                
                 return '';
             })
         ]
