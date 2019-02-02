@@ -7,6 +7,7 @@ At server side, I used mvc structure to organise express code; not perfect thoug
 
 If I got more time, I will revisit the below items:
 
+
     infrastrcuture:
         spend more time understanding issues with docker container to container mysql access.
 
@@ -21,9 +22,12 @@ If I got more time, I will revisit the below items:
         From what I have read reg. react, would also consider a stateful library such as Redux.
         Responsiveness on various devices.
 
-Instructions:
+### Instructions:
+    
     run npm at both server and ui code base as I have introduced couple of new libraries.
+    
     run docker. 
+        
         - ui listens to port 3000
         - server listens to 8080
         - mysql at 3307 for external access.
