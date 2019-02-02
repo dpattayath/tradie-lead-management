@@ -13,7 +13,6 @@
     background-color: #fff;
     border-bottom: 1px solid #eeeeee;
     padding: 15px 20px;
-    
 }
 
 .avatar {
@@ -83,7 +82,7 @@
     font-size: 18px;
 }
 
-.price-accepted {
+.price-accept {
     padding: 10px 10px;
     font-size: 18px;
 }
@@ -125,13 +124,13 @@
     border-bottom: 3px solid #f37926;
 }
 
-.details {
+.details-accept {
     padding: 20px 20px;
     color: #737272;
     font-size: 16px;
 }
 
-.details-desc {
+.desc-accept {
     padding: 20px 0px;
 }
 

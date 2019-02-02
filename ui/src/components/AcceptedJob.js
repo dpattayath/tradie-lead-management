@@ -37,9 +37,9 @@ export class AcceptedJob extends Component {
         
           <span className="category"><i className="icon fas fa-briefcase"></i>{this.props.job.category}</span>
         
-          <span className="jobid">Job ID: {this.props.job.job_id}</span>
+          <span className="jobid">Job ID: {this.props.job.id}</span>
         
-          <span className="price-accepted">
+          <span className="price-accept">
           
                 {new Intl.NumberFormat('en-AU', { 
                     style: 'currency', 
@@ -52,13 +52,13 @@ export class AcceptedJob extends Component {
         
         </div>
         
-        <div className="details">
+        <div className="details-accept">
       
             <i className="icon fas fa-phone"></i><span className="phone">{this.props.job.contact_phone}</span>
       
             <i className="icon fas fa-envelope"></i><span className="email">{this.props.job.contact_email}</span>
       
-            <div className="details-desc">{this.props.job.description}</div>
+            <div className="desc-accept">{this.props.job.description}</div>
       
         </div>
       

@@ -12,10 +12,23 @@ services:
       - ./ui:/opt/ui
     working_dir: /opt/ui
 
+  database:
+    image: mysql:5.6
+    environment:
+      MYSQL_ROOT_PASSWORD: hipages
+      MYSQL_DATABASE: hipages
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./docker/mysql:/docker-entrypoint-initdb.d
+
   server:
     entrypoint: ["npm", "start"]
     environment:
       NODE_ENV: development
+      MYSQL_USER: root
+      MYSQL_PASSWORD: hipages
+      MYSQL_DATABASE: hipages
     image: node:10.15-alpine
     links:
       - database:database
@@ -24,15 +37,3 @@ services:
     volumes:
       - ./server:/opt/server
     working_dir: /opt/server
-  
-  database:
-    image: mysql:5.6
-    environment:
-      MYSQL_ROOT_PASSWORD: hipages
-      MYSQL_DATABASE: hipages
-    ports:
-      - "3307:3306"
-    expose:
-      - "3307"
-    volumes:
-      - ./docker/mysql:/docker-entrypoint-initdb.d

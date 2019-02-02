@@ -28,8 +28,8 @@ export class Jobs extends Component {
     accept = (id) => {
         axios.post('http://localhost:8080/jobs/' + id + '/accept', {}).then((response) => {
             this.setState({jobs: this.state.jobs.map(job => {
-                    if (job.job_id === id) {
-                        job.job_status = 'accepted';
+                    if (job.id === id) {
+                        job.status = 'accepted';
                     }
                     return job;
                 })
@@ -42,8 +42,8 @@ export class Jobs extends Component {
     decline = (id) => {
         axios.post('http://localhost:8080/jobs/' + id + '/decline', {}).then((response) => {
             this.setState({jobs: this.state.jobs.map(job => {
-                    if (job.job_id === id) {
-                        job.job_status = 'declined';
+                    if (job.id === id) {
+                        job.status = 'declined';
                     }
                     return job;
                 })
@@ -70,19 +70,20 @@ export class Jobs extends Component {
                 
                 if (this.state.view === 'new') {
                     
-                    if (job.job_status === 'new') {
+                    if (job.status === 'new') {
                        
-                        return <NewJob key={job.job_id} job={job} accept={this.accept} decline={this.decline}/>
+                        return <NewJob key={job.id} job={job} accept={this.accept} decline={this.decline}/>
                     
                     }
                 
                 } else {
                     
-                    if (job.job_status === 'accepted') {
+                    if (job.status === 'accepted') {
                     
-                        return <AcceptedJob key={job.job_id} job={job}/>
+                        return <AcceptedJob key={job.id} job={job}/>
                     
                     }
+                
                 }
                 
                 return '';

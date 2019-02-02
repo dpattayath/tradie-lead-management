@@ -11,3 +11,7 @@ body {
   margin: auto;
   width: 55%;
 }
+
+button, input {
+  outline: none;
+}

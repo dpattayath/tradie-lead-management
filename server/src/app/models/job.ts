@@ -2,16 +2,15 @@
  * model class than handles operations related to job entity
  */
 
-var db = require('./db');
+var db = require('../connectors/db');
 
 // fetch all jobs
-exports.get = function get(result) {
+exports.get = function (result) {
 
     const query = "SELECT * FROM vw_jobs";
 
     db.query(query, function (err, rows, fields) {
         if (err) {
-            console.log("error", err);
             result(null, err);
         }
         result(null, rows);
@@ -19,11 +18,10 @@ exports.get = function get(result) {
 };
 
 // mark job as accepted
-exports.accept = function get(id, result) {
+exports.accept = function (id, result) {
 
     db.query("UPDATE jobs SET status = 'accepted' WHERE id = ?", [id], function (err, res) {
         if(err) {
-            console.log("error: ", err);
             result(null, err);
         } else {
             result(null, res);
@@ -32,11 +30,10 @@ exports.accept = function get(id, result) {
 };
 
 // mark job as declined
-exports.decline = function get(id, result) {
+exports.decline = function (id, result) {
 
     db.query("UPDATE jobs SET status = 'declined' WHERE id = ?", [id], function (err, res) {
         if(err) {
-            console.log("error: ", err);
             result(null, err);
         } else {
             result(null, res);

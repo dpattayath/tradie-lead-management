@@ -37,7 +37,7 @@ export class NewJob extends Component {
       
           <span className="category"><i className="icon fas fa-briefcase"></i>{this.props.job.category}</span>
       
-          <span className="jobid">Job ID: {this.props.job.job_id}</span>
+          <span className="jobid">Job ID: {this.props.job.id}</span>
       
         </div>
       
@@ -45,9 +45,9 @@ export class NewJob extends Component {
       
         <div className="action">
       
-          <button className="btn btn-accept" onClick={this.props.accept.bind(this, this.props.job.job_id)}>Accept</button>
+          <button className="btn btn-accept" onClick={this.props.accept.bind(this, this.props.job.id)}>Accept</button>
       
-          <button className="btn btn-decline" onClick={this.props.decline.bind(this, this.props.job.job_id)}>Decline</button>
+          <button className="btn btn-decline" onClick={this.props.decline.bind(this, this.props.job.id)}>Decline</button>
       
           <span className="price">
               
